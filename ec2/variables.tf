@@ -12,3 +12,6 @@ variable "subnet_id"{
 variable "key_name"{
      type = string
 }
+variable "security_groups_ids"{
+     type = list(string)
+}

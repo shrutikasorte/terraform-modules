@@ -15,3 +15,6 @@ variable "key_name"{
 variable "security_groups_ids"{
      type = list(string)
 }
+variable "associate_public_ip"{
+     type = boolean
+}

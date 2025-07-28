@@ -73,7 +73,7 @@ resource "aws_eks_node_group" "eks_nodes"{
 
      instance_types = [var.node_instance_type]
      remote_access {
-       ec2_ssh_key = var.ssh_key
+       ec2_ssh_key = var.ssh_key_name
      }
 
      depends_on = [ aws_iam_policy_attachment.eks_worker_node_policies,

@@ -19,7 +19,7 @@ variable "node_max_size" {
  
 }
 
-variable "node_instance_type" {
+variable "node_instance_size" {
   type    = string
   
 }
@@ -27,4 +27,9 @@ variable "node_instance_type" {
 variable "ssh_key_name" {
   type = string
   description = "SSH key name to access worker nodes (must exist in EC2 > Key Pairs)"
+}
+variable "control_plane_sg_id"{
+
+
+  type = string
 }

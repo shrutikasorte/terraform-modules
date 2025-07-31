@@ -21,13 +21,14 @@ resource "aws_iam_role_policy_attachment" "eks_cluster_policy"{
 }
 
 resource "aws_eks_cluster" "eks_cluster"{
-     name = var.cluster.name
+     name = var.cluster_name
      role_arn = aws_iam_role.eks_cluster_role.arn
      
      vpc_config {
           subnet_ids = var.private_subnet_ids
           endpoint_private_access = true
           endpoint_public_access  = false
+          security_group_ids = [var.control_plane_sg.id]
      }
 
      depends_on = [ aws_iam_role_policy_attachment.eks_cluster_policy ]
@@ -37,13 +38,14 @@ resource "aws_eks_cluster" "eks_cluster"{
 resource "aws_iam_role" "eks_node_role" {
      name = "${var.cluster_name}-node-role"
 
-     assume_role_policy = jsondecode({
+     assume_role_policy = jsonencode({
           Version = "2012-10-17"
           Statement = [{
                Effect = "Allow"
                Principal = {
                     Service = "ec2.amazonaws.com"
                }
+               Action = "sts:AssumeRole"
           }]
      })
   
@@ -76,7 +78,7 @@ resource "aws_eks_node_group" "eks_nodes"{
        ec2_ssh_key = var.ssh_key_name
      }
 
-     depends_on = [ aws_iam_policy_attachment.eks_worker_node_policies,
+     depends_on = [ aws_iam_role_policy_attachment.eks_worker_node_policies,
      aws_eks_cluster.eks_cluster
       ]
 }

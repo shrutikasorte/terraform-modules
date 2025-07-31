@@ -6,12 +6,12 @@ locals {
 }
 
 resource "aws_db_subnet_group" "rds_subnet_group"{
-     name = "${var.cluster_name}-rds-subnet-group"
+     name = "rds-subnet-group"
      subnet_ids = module.vpc.private_subnet_ids
 }
 
 resource "aws_db_instance" "rds"{
-     identifier = "${var.cluster_name}-rds"
+     identifier = "rds"
      allocated_storage = 20
      engine = "mysql"
      engine_version = "8.0"

@@ -19,7 +19,7 @@ variable "node_max_size" {
  
 }
 
-variable "node_instance_size" {
+variable "node_instance_type"{
   type    = string
   
 }

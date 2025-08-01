@@ -27,7 +27,7 @@ resource "aws_eks_cluster" "eks_cluster"{
           subnet_ids = var.private_subnet_ids
           endpoint_private_access = true
           endpoint_public_access  = false
-          security_group_ids = [var.control_plane_sg.id]
+          security_group_ids = [var.control_plane_sg_id]
      }
 
      depends_on = [ aws_iam_role_policy_attachment.eks_cluster_policy ]

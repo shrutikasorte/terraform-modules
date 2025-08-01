@@ -3,7 +3,7 @@ variable "ami_id"{
 }
 
 variable "instance_type"{
-     type = sting
+     type = string
 }
 variable "subnet_id"{
      type = string
